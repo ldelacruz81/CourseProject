@@ -1,47 +1,49 @@
+library(reshape)
+
 ## Load data that are common for test and train
-features <- read.csv("features.txt", header=FALSE, sep=" ")
-activity_labels <- read.csv("activity_labels.txt", header=FALSE, sep=" ")
+features <- read.csv("UCI HAR Dataset\\features.txt", header=FALSE, sep=" ")
+activity_labels <- read.csv("UCI HAR Dataset\\activity_labels.txt", header=FALSE, sep=" ")
 
 ## Load test data
 ## load subject_test, x_test, and y_test
-subject_test <- read.csv("test\\subject_test.txt", header=FALSE)
-x_test <- read.csv("test\\x_test.txt", header=FALSE, sep="")
-y_test <- read.csv("test\\y_test.txt", header=FALSE)
+subject_test <- read.csv("UCI HAR Dataset\\test\\subject_test.txt", header=FALSE)
+x_test <- read.csv("UCI HAR Dataset\\test\\x_test.txt", header=FALSE, sep="")
+y_test <- read.csv("UCI HAR Dataset\\test\\y_test.txt", header=FALSE)
 
 ## Load test inertial signals
 ## load body_acc_(xyz)_test
-body_acc_x_test <- read.csv("test\\inertial signals\\body_acc_x_test.txt", header=FALSE, sep="")
-body_acc_y_test <- read.csv("test\\inertial signals\\body_acc_y_test.txt", header=FALSE, sep="")
-body_acc_z_test <- read.csv("test\\inertial signals\\body_acc_z_test.txt", header=FALSE, sep="")
+body_acc_x_test <- read.csv("UCI HAR Dataset\\test\\inertial signals\\body_acc_x_test.txt", header=FALSE, sep="")
+body_acc_y_test <- read.csv("UCI HAR Dataset\\test\\inertial signals\\body_acc_y_test.txt", header=FALSE, sep="")
+body_acc_z_test <- read.csv("UCI HAR Dataset\\test\\inertial signals\\body_acc_z_test.txt", header=FALSE, sep="")
 ## load body_gyro_(xyz)_test
-body_gyro_x_test <- read.csv("test\\inertial signals\\body_gyro_x_test.txt", header=FALSE, sep="")
-body_gyro_y_test <- read.csv("test\\inertial signals\\body_gyro_y_test.txt", header=FALSE, sep="")
-body_gyro_z_test <- read.csv("test\\inertial signals\\body_gyro_z_test.txt", header=FALSE, sep="")
+body_gyro_x_test <- read.csv("UCI HAR Dataset\\test\\inertial signals\\body_gyro_x_test.txt", header=FALSE, sep="")
+body_gyro_y_test <- read.csv("UCI HAR Dataset\\test\\inertial signals\\body_gyro_y_test.txt", header=FALSE, sep="")
+body_gyro_z_test <- read.csv("UCI HAR Dataset\\test\\inertial signals\\body_gyro_z_test.txt", header=FALSE, sep="")
 ## load total_acc_(xyz)_test
-total_acc_x_test <- read.csv("test\\inertial signals\\total_acc_x_test.txt", header=FALSE, sep="")
-total_acc_y_test <- read.csv("test\\inertial signals\\total_acc_y_test.txt", header=FALSE, sep="")
-total_acc_z_test <- read.csv("test\\inertial signals\\total_acc_z_test.txt", header=FALSE, sep="")
+total_acc_x_test <- read.csv("UCI HAR Dataset\\test\\inertial signals\\total_acc_x_test.txt", header=FALSE, sep="")
+total_acc_y_test <- read.csv("UCI HAR Dataset\\test\\inertial signals\\total_acc_y_test.txt", header=FALSE, sep="")
+total_acc_z_test <- read.csv("UCI HAR Dataset\\test\\inertial signals\\total_acc_z_test.txt", header=FALSE, sep="")
 
 
 ## Load train data
 ## load subject_train, x_train, and y_train
-subject_train <- read.csv("train\\subject_train.txt", header=FALSE)
-x_train <- read.csv("train\\x_train.txt", header=FALSE, sep="")
-y_train <- read.csv("train\\y_train.txt", header=FALSE)
+subject_train <- read.csv("UCI HAR Dataset\\train\\subject_train.txt", header=FALSE)
+x_train <- read.csv("UCI HAR Dataset\\train\\x_train.txt", header=FALSE, sep="")
+y_train <- read.csv("UCI HAR Dataset\\train\\y_train.txt", header=FALSE)
 
 ## Load train inertial signals
 ## load body_acc_(xyz)_train
-body_acc_x_train <- read.csv("train\\inertial signals\\body_acc_x_train.txt", header=FALSE, sep="")
-body_acc_y_train <- read.csv("train\\inertial signals\\body_acc_y_train.txt", header=FALSE, sep="")
-body_acc_z_train <- read.csv("train\\inertial signals\\body_acc_z_train.txt", header=FALSE, sep="")
+body_acc_x_train <- read.csv("UCI HAR Dataset\\train\\inertial signals\\body_acc_x_train.txt", header=FALSE, sep="")
+body_acc_y_train <- read.csv("UCI HAR Dataset\\train\\inertial signals\\body_acc_y_train.txt", header=FALSE, sep="")
+body_acc_z_train <- read.csv("UCI HAR Dataset\\train\\inertial signals\\body_acc_z_train.txt", header=FALSE, sep="")
 ## load body_gyro_(xyz)_train
-body_gyro_x_train <- read.csv("train\\inertial signals\\body_gyro_x_train.txt", header=FALSE, sep="")
-body_gyro_y_train <- read.csv("train\\inertial signals\\body_gyro_y_train.txt", header=FALSE, sep="")
-body_gyro_z_train <- read.csv("train\\inertial signals\\body_gyro_z_train.txt", header=FALSE, sep="")
+body_gyro_x_train <- read.csv("UCI HAR Dataset\\train\\inertial signals\\body_gyro_x_train.txt", header=FALSE, sep="")
+body_gyro_y_train <- read.csv("UCI HAR Dataset\\train\\inertial signals\\body_gyro_y_train.txt", header=FALSE, sep="")
+body_gyro_z_train <- read.csv("UCI HAR Dataset\\train\\inertial signals\\body_gyro_z_train.txt", header=FALSE, sep="")
 ## load total_acc_(xyz)_train
-total_acc_x_train <- read.csv("train\\inertial signals\\total_acc_x_train.txt", header=FALSE, sep="")
-total_acc_y_train <- read.csv("train\\inertial signals\\total_acc_y_train.txt", header=FALSE, sep="")
-total_acc_z_train <- read.csv("train\\inertial signals\\total_acc_z_train.txt", header=FALSE, sep="")
+total_acc_x_train <- read.csv("UCI HAR Dataset\\train\\inertial signals\\total_acc_x_train.txt", header=FALSE, sep="")
+total_acc_y_train <- read.csv("UCI HAR Dataset\\train\\inertial signals\\total_acc_y_train.txt", header=FALSE, sep="")
+total_acc_z_train <- read.csv("UCI HAR Dataset\\train\\inertial signals\\total_acc_z_train.txt", header=FALSE, sep="")
 
 ## Merge train and test data
 ## Merge subject, x and y
@@ -60,9 +62,9 @@ total_acc_y <- rbind(total_acc_y_train, total_acc_y_test)
 total_acc_z <- rbind(total_acc_z_train, total_acc_z_test)
 
 ## Extract only the measurements on the mean and standard deviation for each measurement.
-extracted <- x[, c(1:6, 41:46, 81:86, 121:126, 161:166, 201:202, 214:215, 227:228, 240:241, 253:254, 266:271, 345:350, 425:429, 503:504, 516:517, 529:530, 542:543)]
+extracted <- x[, c(1:6, 41:46, 81:86, 121:126, 161:166, 201:202, 214:215, 227:228, 240:241, 253:254, 266:271, 345:350, 424:429, 503:504, 516:517, 529:530, 542:543)]
 
-## Uses descriptive activity names to name the activities in the data set
+## Use descriptive activity names to name the activities in the data set
 y[,2] <- activity_labels[y$V1,2]
 
 ## Appropriately label the data set with descriptive variable names. 
@@ -70,3 +72,13 @@ colnames(extracted) <- features[c(1:6, 41:46, 81:86, 121:126, 161:166, 201:202, 
 
 ## Create a second, independent tidy data set with the average of each variable for each activity and each subject.
 
+## Add columns in the dataset for subject and activity
+extracted$subject <- subject[,1]
+extracted$activity <- y[,2]
+
+## Melt the dataset so it includes columns for subject, activity and variable
+melted <- melt(extracted,id=c("subject", "activity"),measure.vars=colnames(extracted)[1:66])
+
+## Finally, get the mean of the values grouped by subject,activity and variable which gives us our tidy table
+tidy <- ddply(melted, c("subject", "activity", "variable"), summarize, average=mean(value))
+write.table(tidy, file="tidy.txt", row.names=FALSE)
